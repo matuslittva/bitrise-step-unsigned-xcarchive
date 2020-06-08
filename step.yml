@@ -7,6 +7,9 @@ source_code_url: https://github.com/matuslittva/bitrise-step-unsigned-xcarchive
 support_url: https://github.com/matuslittva/bitrise-step-unsigned-xcarchive/issues
 
 host_os_tags:
+- osx
+
+project_type_tags:
 - ios
 
 type_tags:
