@@ -10,12 +10,23 @@ XCRESULT_ARCHIVE_PATH="${XCRESULT_ARCHIVE_FOLDER}/${XCRESULT_ARCHIVE_FULLNAME}"
 
 envman add --key XCRESULT_ARCHIVE_PATH --value "${XCRESULT_ARCHIVE_PATH}"
 
-env NSUnbufferedIO=YES \
-xcodebuild \
--scheme "${xcodebuild_scheme}" \
--configuration "${xcodebuild_config}" \
-clean archive -archivePath "${XCRESULT_ARCHIVE_PATH}" \
-CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+if [[ $xcodebuild_workspace =~ "xcworkspace" ]]
+then
+    env NSUnbufferedIO=YES \
+    xcodebuild \
+    -workspace "${xcodebuild_workspace}" \
+    -scheme "${xcodebuild_scheme}" \
+    -configuration "${xcodebuild_config}" \
+    clean archive -archivePath "${XCRESULT_ARCHIVE_PATH}" \
+    CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+else
+    env NSUnbufferedIO=YES \
+    xcodebuild \
+    -scheme "${xcodebuild_scheme}" \
+    -configuration "${xcodebuild_config}" \
+    clean archive -archivePath "${XCRESULT_ARCHIVE_PATH}" \
+    CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+fi
 
 (
   cd "${XCRESULT_ARCHIVE_FOLDER}"

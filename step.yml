@@ -29,7 +29,7 @@ inputs:
   opts:
     title: The Xcode workspace.
     description: |
-      The value of the `-workspace` option.
+      Xcode workspace (.xcworkspace) or Xcode project (.xcodeproj) name with extension.
     is_expand: true
     is_required: true
 - xcodebuild_scheme: "${BITRISE_SCHEME}"
